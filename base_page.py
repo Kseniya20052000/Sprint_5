@@ -3,7 +3,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 class BasePage:
-    def __init__(self, driver, timeout=10):
+    def __init__(self, driver, timeout=20):
         self.driver = driver
         self.timeout = timeout
         self.wait = WebDriverWait(self.driver, self.timeout)
@@ -37,3 +37,7 @@ class BasePage:
     def wait_for_url_contains(self, substring):
         """Ждет, пока в URL появится нужная подстрока (например, '/login')"""
         return self.wait.until(lambda d: substring in d.current_url)
+
+    def wait_for_url_equals(self, expected_url):
+        """Ожидает, пока URL полностью совпадает с ожидаемым"""
+        self.wait.until(lambda driver: driver.current_url == expected_url)

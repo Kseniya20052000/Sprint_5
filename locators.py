@@ -11,3 +11,10 @@ class LoginPageLocators:
     BUTTON_LOGIN = (By.XPATH, "//button[contains(text(), 'Войти')]")
 
     
+class RegisterPageLocators:
+    LINK_REGISTER = (By.XPATH, "//a[contains(text(), 'Зарегистрироваться')]")
+    INPUT_NAME = (By.NAME, "name")
+    INPUT_EMAIL = (By.XPATH, "(//input[@name='name'])[2]")
+    INPUT_PASSWORD = (By.CSS_SELECTOR, "input[type='password']")
+    BUTTON_REGISTER = (By.XPATH, "//button[contains(text(), 'Зарегистрироваться')]")
+

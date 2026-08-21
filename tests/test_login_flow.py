@@ -23,6 +23,12 @@ class TestLoginFlow:
         
         # 5. ПРОВЕРКА 2: Убеждаемся, что форма входа действительно отрисовалась
         assert login_page.is_login_form_visible(), "Форма входа не появилась после перехода"
+
+        login_page.enter_email("kseniya_kraeva_50131@mail.ru")
+        login_page.enter_password("12345678789")
+        login_page.click_login_button()
         
         # 6. Финальная проверка URL (для отчета в консоль)
         assert "/login" in driver.current_url, f"Ожидался URL с '/login', но получен: {driver.current_url}"
+
+
