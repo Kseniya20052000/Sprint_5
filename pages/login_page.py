@@ -1,6 +1,6 @@
 # LoginPage.py
 from base_page import BasePage
-from locators import LoginPageLocators, MainPageLocators  # Импортируем оба класса локаторов
+from locators import LoginPageLocators, MainPageLocators  
 import json
 import logging
 import time
@@ -13,9 +13,9 @@ INPUT_EMAIL = (By.NAME, "name")
 
 
 class LoginPage(BasePage):
-    # ИЗМЕНЕНИЕ 1: URL теперь ведет на главную страницу
+    
     URL = "https://stellarburgers.education-services.ru/"
-    AUTH_ENDPOINT = "/api/auth/login"
+    
 
     def open(self):
         """Открывает главную страницу."""
@@ -52,56 +52,7 @@ class LoginPage(BasePage):
     def click_login_button(self) -> None:
         self.click_element(LoginPageLocators.BUTTON_LOGIN)
 
-    # --- Методы для работы с API (без изменений логики, только поиск по URL) ---
-
-    def _find_auth_request(self, timeout: int = 10) -> object | None:
-        start_time = time.time()
-        while time.time() - start_time < timeout:
-            if hasattr(self.driver, 'requests') and self.driver.requests:
-                for req in reversed(self.driver.requests):
-                    if req.path.endswith(self.AUTH_ENDPOINT):
-                        if req.response:
-                            return req
-                        break
-            time.sleep(0.3)
-        logger.warning(f"Не найден запрос к {self.AUTH_ENDPOINT} в течение {timeout} секунд")
-        return None
-
-    def _parse_api_response(self, request) -> dict | None:
-        if not request or not request.response:
-            return None
-        try:
-            body = request.response.body
-            if isinstance(body, bytes):
-                body = body.decode('utf-8')
-            else:
-                body = str(body)
-            return json.loads(body)
-        except (json.JSONDecodeError, UnicodeDecodeError, AttributeError) as e:
-            logger.error("Ошибка парсинга JSON: %s", e)
-            return None
-
-    def is_login_successful_via_api(self):
-        """Временная заглушка — всегда возвращает True"""
-        logger.warning("Проверка API отключена — используем заглушку")
-        return True
-
-    def is_login_failed_via_api(self, timeout: int = 10) -> bool:
-        req = self._find_auth_request(timeout)
-        if not req:
-            return False
-        data = self._parse_api_response(req)
-        if not data:
-            return False
-        return not data.get("success", True)
-
-    def get_last_api_response(self, timeout: int = 10) -> dict:
-        req = self._find_auth_request(timeout)
-        if not req:
-            return {}
-        data = self._parse_api_response(req)
-        return data if data is not None else {}
-
+   
     def is_logged_in(self, driver, timeout=10):
         """
         Проверяет, выполнен ли вход в систему.
@@ -113,9 +64,7 @@ class LoginPage(BasePage):
 
         wait = WebDriverWait(driver, timeout)
     
-        # ВАЖНО: Замени локатор ниже на тот, который точно есть в твоем ЛК.
-        # Это может быть кнопка "Выйти", имя пользователя или любой уникальный элемент.
-        # Пример для кнопки "Выйти":
+        
         logout_locator = (By.XPATH, "//button[text()='Выйти']")
     
         try:
@@ -137,7 +86,7 @@ class LoginPage(BasePage):
         """
         
         try:
-            # Увеличиваем таймаут до 15 с для надёжности
+            #  таймаут 15 с для надёжности
             wait = WebDriverWait(self.driver, 15)
             wait.until(EC.visibility_of_element_located(self.INPUT_EMAIL))
             return True
@@ -148,4 +97,18 @@ class LoginPage(BasePage):
     def get_current_url(self):
         return self.driver.current_url
 
-    
+    def click_forgot_password_link(self):
+        """Кликает на ссылку «Восстановить пароль»"""
+        forgot_password_link = self.wait.until(
+            EC.element_to_be_clickable(LoginPageLocators.LINK_FORGOT_PASSWORD)
+        )
+        forgot_password_link.click()
+
+
+    def click_forgot_password_link(self):
+        """Кликает на ссылку «Восстановить пароль»"""
+        forgot_password_link = self.wait.until(
+            EC.element_to_be_clickable(LoginPageLocators.LINK_FORGOT_PASSWORD)
+        )
+        forgot_password_link.click()
+        logger.info("Нажали на ссылку «Восстановить пароль», переходим на страницу восстановления...")        

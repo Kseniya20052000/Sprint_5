@@ -1,3 +1,5 @@
+#Тест регистрации нового пользователя с последующим входом в систему
+
 import pytest
 from pages.main_page import MainPage
 from pages.register_page import RegisterPage
@@ -17,7 +19,7 @@ class TestRegistrationAndLogin:
         self.login_page = LoginPage(self.driver)
 
     def test_registration_followed_by_login(self, driver):
-        """Тест регистрации нового пользователя с последующим входом в систему"""
+        
         main_page = MainPage(driver)
         login_page = LoginPage(driver)
 
@@ -63,12 +65,8 @@ class TestRegistrationAndLogin:
         login_page.click_login_button()
 
 
+        
         logger.info("11. Ждём перехода на главную страницу после успешного входа")
-        self.main_page.wait_for_url_contains(BASE_URL)
+        self.main_page.wait_for_url_contains(BASE_URL)  
 
-        logger.info("12. Проверяем, что пользователь успешно вошёл в систему")
-        current_url = self.login_page.get_current_url()
-        assert BASE_URL in current_url, \
-            f"Ожидался URL {BASE_URL}, но получен: {current_url}"
-
-        logger.info("Тест пройден: пользователь успешно зарегистрировался и вошёл в систему")
+        

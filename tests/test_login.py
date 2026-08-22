@@ -1,4 +1,5 @@
-# tests/test_login.py
+#тест на вход с корректными данными
+#тест на ввод некорректного пароля
 
 import logging
 import pytest
@@ -32,37 +33,7 @@ class TestLogin:
         # 4. Теперь нажимаем кнопку "Войти"
         login_page.click_login_button()
 
-        # 5. Проверяем ответ API
-        #assert login_page.is_login_successful_via_api(), "API вернул success=false"
-        
-        #response = login_page.get_last_api_response()
-        #assert response.get("user", {}).get("email") == "kseniya_kraeva_50131@mail.ru", "Email в ответе не совпадает"
-        #assert "accessToken" in response, "Нет accessToken в ответе"
-        
-        #logger.info("Тест пройден успешно!")
-
-
-    @pytest.mark.parametrize("method", ["main_page"])
-    def test_login_with_different_methods(self, method, login_page, driver):
-        """
-        Параметризованный тест. Сейчас поддерживаем только метод через главную.
-        """
-        login_page.open()
-
-        if method == "main_page":
-            login_page.go_to_login_form()
-        else:
-            pytest.skip(f"Метод {method} пока не реализован или требует других локаторов")
-
-    # Стандартные шаги авторизации
-        login_page.enter_email("kseniya_kraeva_50131@mail.ru")
-        login_page.enter_password("12345678789")
-        login_page.click_login_button()
-
-        assert login_page.is_login_successful_via_api()
-
-    # Проверка API временно отключена (seleniumwire не установлен)
-    logger.info("Проверка API временно отключена")
+     
 
     def test_invalid_password_keeps_user_on_login_page(self, login_page, driver):
         """
@@ -84,9 +55,13 @@ class TestLogin:
 
         # 2. ЕДИНСТВЕННАЯ ПРОВЕРКА (1 тест = 1 проверка)
         # Мы утверждаем, что поле с name="name" ВИДНО.
-        # Если вход успешен -> поле исчезнет -> тест упадет (это правильно).
+        # Если вход успешен -> поле исчезнет -> тест упадет.
         # Если вход не успешен -> поле останется -> тест пройдет.
         assert login_page.is_login_form_visible(), \
             "Ошибка: Поле ввода Email исчезло. Это значит, что пользователь успешно вошёл с неверным паролем!"
         logger.info("Тест пройден: пользователь остался на странице входа, поле Email видно.")
-  
+
+
+
+
+

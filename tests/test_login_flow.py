@@ -1,3 +1,5 @@
+#вход через клик "личный кабинет"
+
 import pytest
 from pages.main_page import MainPage
 from pages.login_page import LoginPage
@@ -28,7 +30,7 @@ class TestLoginFlow:
         login_page.enter_password("12345678789")
         login_page.click_login_button()
         
-        # 6. Финальная проверка URL (для отчета в консоль)
+        # 6. Финальная проверка URL 
         assert "/login" in driver.current_url, f"Ожидался URL с '/login', но получен: {driver.current_url}"
 
 
