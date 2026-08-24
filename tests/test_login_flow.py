@@ -4,7 +4,6 @@ import pytest
 from pages.main_page import MainPage
 from pages.login_page import LoginPage
 
-
 class TestLoginFlow:
     
     def test_click_personal_account_redirects_to_login(self, driver):

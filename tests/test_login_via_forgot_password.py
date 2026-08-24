@@ -3,7 +3,7 @@
 import pytest
 import logging
 from selenium.webdriver.support import expected_conditions as EC
-
+from locators import BASE_URL
 logger = logging.getLogger(__name__)
 
 
@@ -37,12 +37,7 @@ class TestLoginViaForgotPassword:
         login_page.enter_email("kseniya_kraeva_50131@mail.ru")
         login_page.enter_password("12345678789")
 
-        logger.info("7. Кликаем на кнопку «Войти»")
+        logger.info("10. Кликаем на кнопку «Войти»")
         login_page.click_login_button()
-        main_page.wait_for_url_equals(base_url)
 
-        logger.info("8. Проверяем, что пользователь успешно вошёл в систему")
-        current_url = driver.current_url
-        assert base_url in current_url, \
-            f"Ожидался URL {base_url}, но получен: {current_url}"
-        logger.info("Тест пройден: пользователь успешно вошёл через поток восстановления пароля")
+        

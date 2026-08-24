@@ -3,6 +3,7 @@
 import pytest
 import logging
 from selenium.webdriver.support import expected_conditions as EC
+from locators import BASE_URL
 
 logger = logging.getLogger(__name__)
 
@@ -17,12 +18,12 @@ class TestLogoutFunctionality:
         5. Проверить переход на страницу авторизации
         """
         driver = setup_pages['driver']
-        base_url = setup_pages['base_url']
+        URL = BASE_URL
         main_page = setup_pages['main_page']
         login_page = setup_pages['login_page']
 
         logger.info("1. Открываем главную страницу")
-        driver.get(base_url)
+        driver.get(URL)
 
         logger.info("2. Кликаем на кнопку «Войти в аккаунт»")
         login_page.go_to_login_form()

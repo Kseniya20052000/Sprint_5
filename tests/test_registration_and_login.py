@@ -5,10 +5,11 @@ from pages.main_page import MainPage
 from pages.register_page import RegisterPage
 from pages.login_page import LoginPage
 import logging
+from locators import BASE_URL
+from helpers.test_data_helper import TestDataHelper
 
 logger = logging.getLogger(__name__)
 
-BASE_URL = "https://stellarburgers.education-services.ru"
 
 class TestRegistrationAndLogin:
     @pytest.fixture(autouse=True)
@@ -36,19 +37,22 @@ class TestRegistrationAndLogin:
         self.register_page.click_register_link()
 
         logger.info("5. Ждём перехода на страницу регистрации (/register)")
-        self.register_page.wait_for_url_contains("/register")
+        
 
         # Генерируем случайные данные
-        random_name = self.register_page.generate_random_name()
-        random_email = self.register_page.generate_random_email()
-        random_password = self.register_page.generate_random_password()
+        self.register_page.wait_for_url_contains("/register")
 
-        logger.info(f"6. Вводим данные для регистрации: имя={random_name}, email={random_email}, пароль={random_password}")
+        # Получаем случайные данные через хелпер
+        registration_data = TestDataHelper.get_registration_data()
 
-        self.register_page.enter_name(random_name)
-        self.register_page.enter_email(random_email)
-        self.register_page.enter_password(random_password)
+        # Используем данные в тесте
+        self.register_page.enter_name(registration_data['name'])
+        self.register_page.enter_email(registration_data['email'])
+        self.register_page.enter_password(registration_data['password'])
 
+        registration_data = TestDataHelper.get_registration_data()
+
+        
 
         logger.info("7. Кликаем на кнопку «Зарегистрироваться»")
         self.register_page.click_register_button()
@@ -58,8 +62,8 @@ class TestRegistrationAndLogin:
 
 
         logger.info("9. Вводим данные, с которыми только что зарегистрировались")
-        self.login_page.enter_email(random_email)
-        self.login_page.enter_password(random_password)
+        self.login_page.enter_email(registration_data['email'])
+        self.login_page.enter_password(registration_data['password'])
 
         logger.info("10. Кликаем на кнопку «Войти»")
         login_page.click_login_button()

@@ -3,9 +3,13 @@
 import pytest
 import logging
 from selenium.webdriver.support import expected_conditions as EC
+from locators import BASE_URL
 
 logger = logging.getLogger(__name__)
-BASE_URL = "https://stellarburgers.education-services.ru"
+
+    
+
+    
 
 class TestConstructorNavigation:
     def test_navigate_to_constructor_after_login(self, setup_pages):
@@ -17,7 +21,7 @@ class TestConstructorNavigation:
         4. Проверить наличие надписи «Соберите бургер»
         """
         driver = setup_pages['driver']
-        base_url = setup_pages['base_url']
+        URL = BASE_URL
         main_page = setup_pages['main_page']
         login_page = setup_pages['login_page']
 
@@ -41,6 +45,6 @@ class TestConstructorNavigation:
 
         
         current_url = driver.current_url
-        assert base_url in current_url, \
-            f"Ожидался URL {base_url}, но получен: {current_url}"
+        assert BASE_URL in current_url, \
+            f"Ожидался URL {BASE_URL}, но получен: {current_url}"
         logger.info("Тест пройден: пользователь успешно вошёл через поток восстановления пароля")

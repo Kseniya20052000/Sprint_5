@@ -7,6 +7,7 @@ import time
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
+from locators import BASE_URL
 
 logger = logging.getLogger(__name__)
 INPUT_EMAIL = (By.NAME, "name")
@@ -14,12 +15,12 @@ INPUT_EMAIL = (By.NAME, "name")
 
 class LoginPage(BasePage):
     
-    URL = "https://stellarburgers.education-services.ru/"
+    URL = BASE_URL
     
 
     def open(self):
-        """Открывает главную страницу."""
-        self.driver.get(self.URL)
+        # Используем BASE_URL из класса локаторов
+        self.driver.get(LoginPageLocators.BASE_URL)
 
     def go_to_login_form(self):
         """

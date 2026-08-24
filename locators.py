@@ -1,6 +1,8 @@
 from selenium.webdriver.common.by import By
+BASE_URL = "https://stellarburgers.education-services.ru"
 
 class MainPageLocators:
+    BASE_URL = BASE_URL
     # Кнопка "Войти в аккаунт" на главной странице
     BUTTON_LOGIN = (By.XPATH, "//button[contains(text(), 'Войти')]")
     BUTTON_CONSTRUCTOR = (By.CSS_SELECTOR, "p.AppHeader_header__linkText__3q_va.ml-2")
@@ -25,7 +27,7 @@ class LoginPageLocators:
     INPUT_PASSWORD = (By.NAME, "Пароль")
     BUTTON_LOGIN = (By.XPATH, "//button[contains(text(), 'Войти')]")
     LINK_FORGOT_PASSWORD = (By.XPATH, "//a[@class='Auth_link__1fOlj' and contains(text(), 'Восстановить пароль')]")
-
+    BASE_URL = BASE_URL
 
     
 class RegisterPageLocators:
@@ -34,18 +36,21 @@ class RegisterPageLocators:
     INPUT_EMAIL = (By.XPATH, "(//input[@name='name'])[2]")
     INPUT_PASSWORD = (By.CSS_SELECTOR, "input[type='password']")
     BUTTON_REGISTER = (By.XPATH, "//button[contains(text(), 'Зарегистрироваться')]")
-
+    BASE_URL = BASE_URL
 class ForgotPasswordPageLocators:
-    BUTTON_LOGIN = (By.CSS_SELECTOR, "a.Auth_link__1fOlj")
-
+    BUTTON_LOGIN = (By.CSS_SELECTOR, "a.Auth_link__1fOlj[href='/login']")
+    BASE_URL = BASE_URL
 
 class ConstructorLocators:
     # Кнопки разделов (табы)
-    TAB_BUNS = (By.XPATH, "//div[contains(@class, 'tab_tab') and .//span[text()='Булки']]")
-    TAB_SAUCES = (By.XPATH, "//div[contains(@class, 'tab_tab') and .//span[text()='Соусы']]")
-    TAB_FILLINGS = (By.XPATH, "//div[contains(@class, 'tab_tab') and .//span[text()='Начинки']]")
+    SAUCES_TAB = (By.XPATH, "//div[contains(@class, 'tab_tab__1SPyG') and .//span[text()='Соусы']]")
+    FILLINGS_TAB = (By.XPATH, "//div[contains(@class, 'tab_tab__1SPyG') and .//span[text()='Начинки']]")
+    BUNS_TAB = (By.XPATH, "//div[contains(@class, 'tab_tab__1SPyG') and .//span[text()='Булки']]")
 
     # Заголовки разделов на странице
     HEADER_BUNS = (By.XPATH, "//h2[text()='Булки']")
     HEADER_SAUCES = (By.XPATH, "//h2[text()='Соусы']")
     HEADER_FILLINGS = (By.XPATH, "//h2[text()='Начинки']")
+    BASE_URL = BASE_URL
+
+    
