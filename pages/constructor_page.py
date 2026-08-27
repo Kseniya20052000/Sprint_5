@@ -30,14 +30,10 @@ class ConstructorPage:
     def click_buns_tab(self):
         """Кликает на вкладку «Булки», гарантируя переключение"""
         logger.info("Проверяем текущее состояние вкладки «Булки»")
-        current_tab = self.driver.find_element(*ConstructorLocators.BUNS_TAB)
-        is_already_active = "tab_tab_type_current__2BEPc" in current_tab.get_attribute("class")
 
-        if is_already_active:
+        if self.is_buns_tab_active():
             logger.info("Вкладка «Булки» уже активна, переходим на другую вкладку для теста")
-            # Кликаем на «Соусы», чтобы гарантированно деактивировать «Булки»
             self.click_sauces_tab()
-            # Ждём стабилизации
             self.wait.until(
                 lambda driver: "tab_tab_type_current__2BEPc" in driver.find_element(*ConstructorLocators.SAUCES_TAB).get_attribute("class")
             )
@@ -47,41 +43,27 @@ class ConstructorPage:
             EC.element_to_be_clickable(ConstructorLocators.BUNS_TAB)
         )
         buns_tab.click()
-        # Ждём обновления интерфейса
         self.wait.until(
             lambda driver: "tab_tab_type_current__2BEPc" in driver.find_element(*ConstructorLocators.BUNS_TAB).get_attribute("class")
         )
 
-    def is_sauces_tab_active(self):
-        """Проверяет, активна ли вкладка «Соусы»"""
-        tab = self.wait.until(
-            EC.presence_of_element_located(ConstructorLocators.SAUCES_TAB)
-        )
-        class_attr = tab.get_attribute("class")
-        is_active = "tab_tab_type_current__2BEPc" in class_attr
-        logger.info(f"Вкладка «Соусы»: активна = {is_active}, классы = {class_attr}")
-        return is_active
-
-    def is_fillings_tab_active(self):
-        """Проверяет, активна ли вкладка «Начинки»"""
-        tab = self.wait.until(
-            EC.presence_of_element_located(ConstructorLocators.FILLINGS_TAB)
-        )
-        class_attr = tab.get_attribute("class")
-        is_active = "tab_tab_type_current__2BEPc" in class_attr
-        logger.info(f"Вкладка «Начинки»: активна = {is_active}, классы = {class_attr}")
-        return is_active
-
-    def is_buns_tab_active(self):
-        """Проверяет, активна ли вкладка «Булки» с ожиданием"""
+    def is_tab_active(self, tab_locator):
+        """Проверяет, активна ли вкладка"""
         try:
             self.wait.until(
-                lambda driver: "tab_tab_type_current__2BEPc" in driver.find_element(*ConstructorLocators.BUNS_TAB).get_attribute("class")
+                lambda driver: "tab_tab_type_current__2BEPc" in driver.find_element(*tab_locator).get_attribute("class")
             )
-            logger.info("Вкладка «Булки»: активна")
+            logger.info(f"Вкладка активна: {tab_locator}")
             return True
         except:
-            tab = self.driver.find_element(*ConstructorLocators.BUNS_TAB)
-            class_attr = tab.get_attribute("class")
-            logger.error(f"Вкладка «Булки»: неактивна, классы = {class_attr}")
+            logger.warning(f"Вкладка неактивна: {tab_locator}")
             return False
+
+    def is_sauces_tab_active(self):
+        return self.is_tab_active(ConstructorLocators.SAUCES_TAB)
+
+    def is_fillings_tab_active(self):
+        return self.is_tab_active(ConstructorLocators.FILLINGS_TAB)
+
+    def is_buns_tab_active(self):
+        return self.is_tab_active(ConstructorLocators.BUNS_TAB)
