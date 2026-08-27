@@ -28,7 +28,7 @@ class LoginPageLocators:
     BUTTON_LOGIN = (By.XPATH, "//button[contains(text(), 'Войти')]")
     LINK_FORGOT_PASSWORD = (By.XPATH, "//a[@class='Auth_link__1fOlj' and contains(text(), 'Восстановить пароль')]")
     BASE_URL = BASE_URL
-
+    LOGOUT_BUTTON = (By.XPATH, "//button[text()='Выйти']")
     
 class RegisterPageLocators:
     LINK_REGISTER = (By.XPATH, "//a[contains(text(), 'Зарегистрироваться')]")

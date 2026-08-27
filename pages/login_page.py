@@ -66,7 +66,7 @@ class LoginPage(BasePage):
         wait = WebDriverWait(driver, timeout)
     
         
-        logout_locator = (By.XPATH, "//button[text()='Выйти']")
+        logout_locator = LoginPageLocators.LOGOUT_BUTTON
     
         try:
             # Пытаемся найти элемент ЛК. Если он есть — вход успешен.
