@@ -2,7 +2,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from locators import ConstructorLocators
 import logging
-import time
+from selenium.webdriver.common.by import By
 
 logger = logging.getLogger(__name__)
 
@@ -38,7 +38,9 @@ class ConstructorPage:
             # Кликаем на «Соусы», чтобы гарантированно деактивировать «Булки»
             self.click_sauces_tab()
             # Ждём стабилизации
-            time.sleep(1)
+            self.wait.until(
+                lambda driver: "tab_tab_type_current__2BEPc" in driver.find_element(*ConstructorLocators.SAUCES_TAB).get_attribute("class")
+            )
 
         logger.info("Кликаем на вкладку «Булки»")
         buns_tab = self.wait.until(
@@ -46,7 +48,9 @@ class ConstructorPage:
         )
         buns_tab.click()
         # Ждём обновления интерфейса
-        time.sleep(1)
+        self.wait.until(
+            lambda driver: "tab_tab_type_current__2BEPc" in driver.find_element(*ConstructorLocators.BUNS_TAB).get_attribute("class")
+        )
 
     def is_sauces_tab_active(self):
         """Проверяет, активна ли вкладка «Соусы»"""
