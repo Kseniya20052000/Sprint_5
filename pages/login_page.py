@@ -1,13 +1,15 @@
 # LoginPage.py
 from base_page import BasePage
 from locators import LoginPageLocators, MainPageLocators  
-import json
 import logging
 import time
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from locators import BASE_URL
+
+
+
 
 logger = logging.getLogger(__name__)
 INPUT_EMAIL = (By.NAME, "name")
@@ -59,9 +61,7 @@ class LoginPage(BasePage):
         Проверяет, выполнен ли вход в систему.
         Возвращает True, если элемент личного кабинета найден, иначе False.
         """
-        from selenium.webdriver.support.ui import WebDriverWait
-        from selenium.webdriver.support import expected_conditions as EC
-        from selenium.webdriver.common.by import By
+        
 
         wait = WebDriverWait(driver, timeout)
     
