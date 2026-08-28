@@ -10,8 +10,8 @@ class MainPageLocators:
     BUTTON_LOGIN_ACCOUNT = (By.XPATH, "//button[contains(text(), 'Войти в аккаунт')]")
     # Кнопка «Личный кабинет»
     BUTTON_PERSONAL_ACCOUNT = (By.XPATH, "//a[contains(@href, '/account')]")
-
-
+    #кнопка "оформить заказ" для авторизованных пользователей
+    ORDER_BUTTON = (By.XPATH, "//button[contains(text(), 'Оформить заказ')]")
     # Кнопка «Выход» в личном кабинете
     BUTTON_LOGOUT = (By.XPATH, "//button[contains(text(), 'Выход')]")
 
