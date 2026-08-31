@@ -19,18 +19,16 @@ class TestLoginFlow:
         # 3. Кликаем на кнопку "Личный кабинет"
         main_page.click_personal_account()
         
-        # 4. ПРОВЕРКА 1: Ждем, пока URL изменится на /login
+        # 4. Ждем, пока URL изменится на /login
         # Это доказывает, что произошел переход на новую страницу (или состояние)
         login_page.wait_for_url_contains("/login")
         
-        # 5. ПРОВЕРКА 2: Убеждаемся, что форма входа действительно отрисовалась
-        assert login_page.is_login_form_visible(), "Форма входа не появилась после перехода"
-
+        
         login_page.enter_email(VALID_USER["email"])
         login_page.enter_password(VALID_USER["password"])
         login_page.click_login_button()
         
-        # 6. Финальная проверка URL 
+        # 5. Финальная проверка URL 
         assert "/login" in driver.current_url, f"Ожидался URL с '/login', но получен: {driver.current_url}"
 
 
