@@ -27,7 +27,7 @@ class TestLogin:
         # 2. Переходим к форме через кнопку на главной
         login_page.go_to_login_form()
 
-        # Вводим данные из data.py
+        # 3. Вводим данные из data.py
         login_page.enter_email(VALID_USER["email"])
         login_page.enter_password(VALID_USER["password"])
         
@@ -55,12 +55,12 @@ class TestLogin:
         login_page.open()
         login_page.go_to_login_form()
         
-        # Вводим данные
+        # 2. Вводим данные
         login_page.enter_email(INCORRECT_DATA["email"])
         login_page.enter_password(INCORRECT_DATA["password"])
         login_page.click_login_button()
 
-        # 2. ЕДИНСТВЕННАЯ ПРОВЕРКА (1 тест = 1 проверка)
+        # 3. ЕДИНСТВЕННАЯ ПРОВЕРКА (1 тест = 1 проверка)
         assert login_page.is_login_form_visible(), \
             "Ошибка: Поле ввода Email исчезло. Это значит, что пользователь успешно вошёл с неверным паролем!"
         

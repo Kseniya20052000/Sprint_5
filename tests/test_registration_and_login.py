@@ -45,7 +45,7 @@ class TestRegistrationAndLogin:
         # Получаем случайные данные через хелпер
         registration_data = TestDataHelper.get_registration_data()
 
-        # Используем данные в тесте
+        logger.info("6. Используем данные в тесте")
         self.register_page.enter_name(registration_data['name'])
         self.register_page.enter_email(registration_data['email'])
         self.register_page.enter_password(registration_data['password'])
