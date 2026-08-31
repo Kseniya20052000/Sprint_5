@@ -5,7 +5,7 @@ import logging
 from selenium.webdriver.support import expected_conditions as EC
 from locators import BASE_URL
 logger = logging.getLogger(__name__)
-
+from data import VALID_USER
 
 class TestLoginViaForgotPassword:
     def test_login_through_forgot_password_flow(self, setup_pages):
@@ -34,8 +34,8 @@ class TestLoginViaForgotPassword:
         login_page.wait_for_url_contains("/login")
 
         logger.info("5. Вводим рабочие email и пароль")
-        login_page.enter_email("kseniya_kraeva_50131@mail.ru")
-        login_page.enter_password("12345678789")
+        login_page.enter_email(VALID_USER["email"])
+        login_page.enter_password(VALID_USER["password"])
 
         logger.info("6. Кликаем на кнопку «Войти»")
         login_page.click_login_button()

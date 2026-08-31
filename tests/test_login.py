@@ -7,7 +7,8 @@ from pages.login_page import LoginPage
 from pages.main_page import MainPage 
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from locators import LoginPageLocators, MainPageLocators  
+from locators import LoginPageLocators, MainPageLocators
+from data import VALID_USER, INCORRECT_DATA
 
 logger = logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO)
@@ -26,10 +27,11 @@ class TestLogin:
         # 2. Переходим к форме через кнопку на главной
         login_page.go_to_login_form()
 
-        # 3. ВВОДИМ ДАННЫЕ
-        login_page.enter_email("kseniya_kraeva_50131@mail.ru")
-        login_page.enter_password("12345678789")
-
+        # Вводим данные из data.py
+        login_page.enter_email(VALID_USER["email"])
+        login_page.enter_password(VALID_USER["password"])
+        
+        
         # 4. Нажимаем кнопку "Войти"
         login_page.click_login_button()
 
@@ -54,8 +56,8 @@ class TestLogin:
         login_page.go_to_login_form()
         
         # Вводим данные
-        login_page.enter_email("Kseniya_Kraeva_50131@mail.ru")
-        login_page.enter_password("wrong_password_123")  # Неверный пароль
+        login_page.enter_email(INCORRECT_DATA["email"])
+        login_page.enter_password(INCORRECT_DATA["password"])
         login_page.click_login_button()
 
         # 2. ЕДИНСТВЕННАЯ ПРОВЕРКА (1 тест = 1 проверка)

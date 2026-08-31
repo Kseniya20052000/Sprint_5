@@ -4,6 +4,7 @@ import pytest
 import logging
 from selenium.webdriver.support import expected_conditions as EC
 from locators import BASE_URL
+from data import VALID_USER
 
 logger = logging.getLogger(__name__)
 
@@ -29,8 +30,8 @@ class TestLogoutFunctionality:
         login_page.go_to_login_form()
 
         logger.info("3. Вводим корректные данные для входа")
-        login_page.enter_email("kseniya_kraeva_50131@mail.ru")
-        login_page.enter_password("12345678789")
+        login_page.enter_email(VALID_USER["email"])
+        login_page.enter_password(VALID_USER["password"])
 
         logger.info("4. Выполняем вход в аккаунт")
         login_page.click_login_button()

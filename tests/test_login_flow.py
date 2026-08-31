@@ -3,6 +3,7 @@
 import pytest
 from pages.main_page import MainPage
 from pages.login_page import LoginPage
+from data import VALID_USER
 
 class TestLoginFlow:
     
@@ -25,8 +26,8 @@ class TestLoginFlow:
         # 5. ПРОВЕРКА 2: Убеждаемся, что форма входа действительно отрисовалась
         assert login_page.is_login_form_visible(), "Форма входа не появилась после перехода"
 
-        login_page.enter_email("kseniya_kraeva_50131@mail.ru")
-        login_page.enter_password("12345678789")
+        login_page.enter_email(VALID_USER["email"])
+        login_page.enter_password(VALID_USER["password"])
         login_page.click_login_button()
         
         # 6. Финальная проверка URL 
