@@ -49,3 +49,6 @@ class TestLogoutFunctionality:
 
         logger.info("7. Ждём перехода на страницу входа (/login)")
         login_page.wait_for_url_contains("/login")
+
+        # 8. Финальная проверка URL 
+        assert "/login" in driver.current_url, f"Ожидался URL с '/login', но получен: {driver.current_url}"
