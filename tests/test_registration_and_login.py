@@ -73,4 +73,5 @@ class TestRegistrationAndLogin:
         logger.info("11. Ждём перехода на главную страницу после успешного входа")
         self.main_page.wait_for_url_contains(BASE_URL)  
 
-        
+        assert BASE_URL in self.driver.current_url, "Не перешли на главную страницу после входа"
+
