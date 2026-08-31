@@ -25,19 +25,22 @@ class TestLoginViaForgotPassword:
         login_page.wait_for_url_contains("/login")
 
 
-        logger.info("4. Кликаем на ссылку «Восстановить пароль»")
+        logger.info("3. Кликаем на ссылку «Восстановить пароль»")
         login_page.click_forgot_password_link()
         forgot_password_page.wait_for_url_contains("/forgot-password")
 
-        logger.info("5. Кликаем на кнопку «Войти» на странице восстановления")
+        logger.info("4. Кликаем на кнопку «Войти» на странице восстановления")
         forgot_password_page.click_login_link()
         login_page.wait_for_url_contains("/login")
 
-        logger.info("6. Вводим рабочие email и пароль")
+        logger.info("5. Вводим рабочие email и пароль")
         login_page.enter_email("kseniya_kraeva_50131@mail.ru")
         login_page.enter_password("12345678789")
 
-        logger.info("10. Кликаем на кнопку «Войти»")
+        logger.info("6. Кликаем на кнопку «Войти»")
         login_page.click_login_button()
 
-        
+        assert main_page.is_burger_assembly_text_visible(), \
+            "Ошибка: Кнопка «Оформить заказ» не отображается. Пользователь не авторизован или страница не загрузилась."
+                
+        logger.info("Тест пройден: кнопка «Оформить заказ» видна, пользователь авторизован.")
