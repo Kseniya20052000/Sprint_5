@@ -1,0 +1,42 @@
+# Виртуальное окружение Python
+venv/
+env/
+.venv/
+
+# Кеш Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Файлы Pytest
+.pytest_cache/
+
+# Логи
+*.log
+logs/
+
+# Временные файлы ОС
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Браузерные профили и временные файлы Selenium
+webdriver/
+chromedriver.log
+
+
+# Артефакты сборки
+build/
+dist/
+*.egg-info/
+
+# Резервные копии
+*.bak
+*~
+
+# IDE и редакторы кода
+.vscode/
+.idea/
+*.swp
+*.swo
